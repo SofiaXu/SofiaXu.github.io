@@ -22,3 +22,5 @@ function RemovvFourmDisplayAD()
     $("tbody#separatorline").next().remove();
     $("[colspan='6']").parent().parent().remove();
 }
+
+RemoveUseless();

@@ -14,7 +14,7 @@ function RemoveUseless()
 
 function RemoveSideBar()
 {
-    $("div#ts_sidebar_base").remove();
+    $("div#ts_sidebar_base").css("display", "none");
 }
 
 function RemovvFourmDisplayAD()

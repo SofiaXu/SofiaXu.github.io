@@ -24,6 +24,6 @@ function RateThem()
             }
         }
 
-        window.location.href = window.location.protocol + "//www.tsdm.me/plugin.php?id=minerva:batch_rate&action=new_task&tid=" + tidList;
+        window.open(window.location.protocol + "//www.tsdm.me/plugin.php?id=minerva:batch_rate&action=new_task&tid=" + tidList);
     }
 }

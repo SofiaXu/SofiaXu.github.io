@@ -14,7 +14,7 @@ function RemoveUseless()
 
 function RemoveSideBar()
 {
-    var a = $("div#ts_sidebar_base");
+    var a = $("ts_sidebar_base");
     a.parentNode.removeChild(a);
 }
 

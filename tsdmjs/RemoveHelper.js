@@ -15,7 +15,7 @@ function RemoveUseless()
 function RemoveSideBar()
 {
     var a = $("div#ts_sidebar_base");
-    a.parent().removeData(a);
+    a.parentNode.removeChild(a);
 }
 
 function RemovvFourmDisplayAD()

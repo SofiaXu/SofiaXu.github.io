@@ -237,8 +237,8 @@
             if (window.top)
             {
                 //release
-                window.top.querySelector("#fastpostmessage").value = answer;
-                window.top.querySelector("#fastpostsubmit").click();
+                parent.document.querySelector("#fastpostmessage").value = answer;
+                parent.document.querySelector("#fastpostsubmit").click();
             }
             else
             {

@@ -5,7 +5,8 @@
 // @description  提供了一些便利的发帖和管理功能，持续更新中，需要更多功能请私信联系あおば (UID: 1639751)
 // @author       Aoba xu
 // @match        https://www.tsdm.live/*
-// @grant        none
+// @grant        GM_xmlhttpRequest
+// @connect      sm.ms
 // ==/UserScript==
 
 window.addEventListener("load", () => {
@@ -90,5 +91,94 @@ window.addEventListener("load", () => {
         });
         box.appendChild(autoresizebtn);
         document.getElementById("e_button").appendChild(box);
+
+        // duplicate e_btn_local as e_btn_remote and append to e_image_ctrl
+        var e_image_ctrl = document.getElementById("e_image_ctrl");
+        var e_btn_local = document.getElementById("e_btn_local");
+        var e_btn_remote = e_btn_local.cloneNode(true);
+        e_image_ctrl.appendChild(e_btn_remote);
+
+        // patch e_btn_remote
+        e_btn_remote.id = 'e_btn_remote';
+        var e_btn_remote_link = e_btn_remote.querySelector('a');
+        e_btn_remote_link.setAttribute("onclick", "switchImagebutton('remote');");
+        e_btn_remote_link.text = "图床上传";
+
+        // duplicate e_local as e_remote and append to container
+        var e_local = document.getElementById("e_local");
+        var e_remote = e_local.cloneNode(true);
+        e_image_ctrl.parentElement.appendChild(e_remote);
+
+        // patch e_remote
+        e_remote.id = "e_remote";
+        e_remote.querySelector('#imgattachbtnhidden').remove()
+        var e_remote_notice = e_remote.querySelector(".notice");
+        e_remote_notice.innerText = "使用 sm.ms 图床";
+        var e_remote_form = e_remote.querySelector('form');
+        e_remote_form.removeAttribute("action");
+        e_remote_form.querySelectorAll("input[type=hidden]").forEach(el => el.remove());
+        var e_remote_btn = e_remote.querySelector("#imguploadbtn > button");
+        e_remote_btn.removeAttribute("onclick");
+        var e_remote_file = e_remote_form.querySelector("input[type=file]");
+
+        var e_remote_btn_span = e_remote_btn.querySelector("span");
+        var uploadHandler = _ev => {
+            var pending_file = e_remote_file.files[0];
+            if (!pending_file) return;
+
+            if (pending_file.size > 5000000) {
+                alert("图片不得超过 5M");
+                return;
+            }
+
+            var pending_formdata = new FormData();
+            pending_formdata.append("smfile", pending_file);
+
+            e_remote_btn_span.innerText = "上传中……";
+            GM_xmlhttpRequest({
+                method: "POST",
+                url: "https://sm.ms/api/v2/upload",
+                headers: { "Authorization": "0dYlZjbwhYrCcDdx0QYFUF8A5Wmf5ux3" },
+                data: pending_formdata,
+                onload: function () {
+                    if (this.status === 200) {
+                        var upload_response = JSON.parse(this.responseText);
+
+                        var image_url = "";
+                        if (upload_response.code === "success") {
+                            image_url = upload_response.data.url;
+                        } else if (upload_response.code === "image_repeated") {
+                            image_url = upload_response.images;
+                        }
+
+                        var readImage = new Image();
+                        readImage.onload = () => {
+                            var image_width = readImage.width;
+                            var image_height = readImage.height;
+
+                            // resize image
+                            var fit_width = 712;
+                            if (image_width > fit_width) {
+                                image_height = Math.round(image_height / image_width * fit_width);
+                                image_width = fit_width;
+                            }
+
+                            // the ugly part
+                            var image_code = unsafeWindow.wysiwyg
+                                ? `<img src="${image_url}" width="${image_width}" height="${image_height}" border=0 />`
+                                : `[img=${image_width},${image_height}]${image_url}[/img]`;
+
+                            unsafeWindow.insertText(image_code);
+                        };
+                        readImage.src = image_url;
+                    } else {
+                        var upload_error = JSON.parse(this.responseText);
+                        alert("图片上传出错：" + upload_error.message);
+                    }
+                    e_remote_btn_span.innerText = "上传";
+                }
+            });
+        };
+        e_remote_btn.onclick = uploadHandler;
     }
 });

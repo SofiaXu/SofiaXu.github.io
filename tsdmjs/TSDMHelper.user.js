@@ -10,12 +10,36 @@
 
 window.addEventListener("load", () => {
     'use strict';
-    // 帖子预览页面增加 PID 显示
+    // 1. 帖子预览页面增加 PID 显示
+    // 2. 复制链接非使用原生功能(仅测试 Chromium 系浏览器，理论上通用)
     if (/mod=viewthread/.test(location.href) && /tid=\d+/.test(location.href)) {
         document.querySelectorAll("[id^=pid]").forEach((item, key, parent) => {
             var pidLabel = document.createElement("em");
             pidLabel.innerText = item.id.replace("pid", "PID: ");
             item.querySelector(".authi").appendChild(pidLabel);
+        });
+        document.querySelector(".xw0.xs1.xg1>a:last-child").onclick = () => {
+            var link = document.querySelector(".xw0.xs1.xg1>a:first-child");
+            var copyBox = document.createElement("textarea");
+            copyBox.value = link.innerHTML + "\n" + link.href;
+            document.body.appendChild(copyBox);
+            copyBox.select();
+            document.execCommand("Copy");
+            document.body.removeChild(copyBox);
+            alert("复制成功");
+            return false;
+        };
+        document.querySelectorAll(".pi>strong>a").forEach((item, key, parent) => {
+            item.onclick = () => {
+                var copyBox = document.createElement("textarea");
+                copyBox.value = item.href;
+                document.body.appendChild(copyBox);
+                copyBox.select();
+                document.execCommand("Copy");
+                document.body.removeChild(copyBox);
+                alert("复制成功");
+                return false;
+            };
         });
     }
 

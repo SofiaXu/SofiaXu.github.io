@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         天使动漫辅助
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.3
 // @description  提供了一些便利的发帖和管理功能，持续更新中，需要更多功能请私信联系あおば (UID: 1639751)
 // @author       Aoba xu
 // @match        https://www.tsdm.live/*

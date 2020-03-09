@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         天使动漫辅助
 // @namespace    http://tampermonkey.net/
-// @version      0.1.3.1
+// @version      0.1.3.2
 // @description  提供了一些便利的发帖和管理功能，持续更新中，需要更多功能请私信联系あおば (UID: 1639751)
 // @author       Aoba xu
 // @match        https://www.tsdm.live/*
@@ -110,14 +110,17 @@ window.addEventListener("load", () => {
             imageCtrl.parentElement.appendChild(remotePanel);
             remotePanel.id = "e_remote";
             remotePanel.querySelector('#imgattachbtnhidden').remove()
-            remotePanel.querySelector(".notice").innerText = "使用 sm.ms 图床";
+            remotePanel.querySelector(".notice").innerText = "使用 sm.ms 图床（请注意，如长时间未插入可能是图片过大或网络拥堵）";
             var remoteForm = remotePanel.querySelector('form');
             remoteForm.removeAttribute("action");
             remoteForm.querySelectorAll("input[type=hidden]").forEach(el => el.remove());
             var remoteBtn = remotePanel.querySelector("#imguploadbtn > button");
             remoteBtn.removeAttribute("onclick");
             var remoteFile = remoteForm.querySelector("input[type=file]");
-            remoteFile.accept = "image/*"
+            remoteFile.accept = "image/*";
+            var imageUrlPreviewTip = document.createElement("p");
+            imageUrlPreviewTip.innerText = "图片链接: ";
+            remoteForm.appendChild(imageUrlPreviewTip);
     
             var remoteBtnSpan = remoteBtn.querySelector("span");
             var uploadHandler = _ev => {
@@ -145,34 +148,50 @@ window.addEventListener("load", () => {
                             var imageUrl = "";
                             if (uploadResponse.code === "success") {
                                 imageUrl = uploadResponse.data.url;
-                            } else if (uploadResponse.code === "image_repeated") {
-                                imageUrl = uploadResponse.images;
-                            }
-    
-                            var readImage = new Image();
-                            readImage.onload = () => {
-                                var imageWidth = readImage.width;
-                                var imageHeight = readImage.height;
+                                var imageWidth = uploadResponse.data.width;
+                                var imageHeight = uploadResponse.data.height;
     
                                 var fitWidth = 712;
                                 if (imageWidth > fitWidth) {
                                     imageHeight = Math.round(imageHeight / imageWidth * fitWidth);
                                     imageWidth = fitWidth;
                                 }
-    
+                                
                                 var imageCode = unsafeWindow.wysiwyg
-                                    ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
-                                    : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
-    
+                                ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
+                                : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
+
                                 unsafeWindow.insertText(imageCode);
-                            };
-                            readImage.src = imageUrl;
+                            } else if (uploadResponse.code === "image_repeated") {
+                                imageUrl = uploadResponse.images;
+                                var readImage = new Image();
+                                readImage.onload = () => {
+                                    var imageWidth = readImage.width;
+                                    var imageHeight = readImage.height;
+        
+                                    var fitWidth = 712;
+                                    if (imageWidth > fitWidth) {
+                                        imageHeight = Math.round(imageHeight / imageWidth * fitWidth);
+                                        imageWidth = fitWidth;
+                                    }
+        
+                                    var imageCode = unsafeWindow.wysiwyg
+                                        ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
+                                        : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
+        
+                                    unsafeWindow.insertText(imageCode);
+                                };
+                                readImage.src = imageUrl;
+                            }
+
+                            var imageUrlPreview = document.createElement("p");
+                            imageUrlPreview.innerText = imageUrl;
+                            remoteForm.appendChild(imageUrlPreview);
                         } else {
                             var uploadError = JSON.parse(this.responseText);
                             alert("图片上传出错：" + uploadError.message);
                         }
                         remoteBtnSpan.innerText = "上传";
-                        remoteForm.reset();
                     }
                 });
             };

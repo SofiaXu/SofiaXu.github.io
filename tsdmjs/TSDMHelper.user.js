@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name         天使动漫辅助
 // @namespace    http://tampermonkey.net/
-// @version      0.1.3.2
+// @version      0.1.4
 // @description  提供了一些便利的发帖和管理功能，持续更新中，需要更多功能请私信联系あおば (UID: 1639751)
 // @author       Aoba xu
 // @match        https://www.tsdm.live/*
 // @grant        GM_xmlhttpRequest
 // @connect      sm.ms
+// @run-at       document-idle
 // ==/UserScript==
 
-window.addEventListener("load", () => {
+(function(){
     'use strict';
     // 1. 帖子预览页面增加 PID 显示
     // 2. 复制链接非使用原生功能(仅测试 Chromium 系浏览器，理论上通用)
@@ -43,7 +44,7 @@ window.addEventListener("load", () => {
             };
         });
     }
-
+    
     // 1. 帖子发帖时缩放图像大小功能（仅限外链图片）
     // 2. 增加图床上传功能，感谢 vizv
     if (/mod=post|mod=viewthread|mod=forumdisplay/.test(location.href)) {
@@ -121,21 +122,21 @@ window.addEventListener("load", () => {
             var imageUrlPreviewTip = document.createElement("p");
             imageUrlPreviewTip.innerText = "图片链接: ";
             remoteForm.appendChild(imageUrlPreviewTip);
-    
+
             var remoteBtnSpan = remoteBtn.querySelector("span");
             var uploadHandler = _ev => {
                 var pendingFile = remoteFile.files[0];
                 if (!pendingFile) return;
-    
+
                 if (pendingFile.size > 5000000) {
                     alert("图片不得超过 5M");
                     return;
                 }
-    
+
                 var pendingFormdata = new FormData();
                 pendingFormdata.append("smfile", pendingFile);
                 pendingFormdata.append("file_id", "0");
-    
+
                 remoteBtnSpan.innerText = "上传中……";
                 GM_xmlhttpRequest({
                     method: "POST",
@@ -144,19 +145,19 @@ window.addEventListener("load", () => {
                     onload: function () {
                         if (this.status === 200) {
                             var uploadResponse = JSON.parse(this.responseText);
-    
+
                             var imageUrl = "";
                             if (uploadResponse.code === "success") {
                                 imageUrl = uploadResponse.data.url;
                                 var imageWidth = uploadResponse.data.width;
                                 var imageHeight = uploadResponse.data.height;
-    
+
                                 var fitWidth = 712;
                                 if (imageWidth > fitWidth) {
                                     imageHeight = Math.round(imageHeight / imageWidth * fitWidth);
                                     imageWidth = fitWidth;
                                 }
-                                
+
                                 var imageCode = unsafeWindow.wysiwyg
                                 ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
                                 : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
@@ -168,17 +169,17 @@ window.addEventListener("load", () => {
                                 readImage.onload = () => {
                                     var imageWidth = readImage.width;
                                     var imageHeight = readImage.height;
-        
+
                                     var fitWidth = 712;
                                     if (imageWidth > fitWidth) {
                                         imageHeight = Math.round(imageHeight / imageWidth * fitWidth);
                                         imageWidth = fitWidth;
                                     }
-        
+
                                     var imageCode = unsafeWindow.wysiwyg
                                         ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
                                         : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
-        
+
                                     unsafeWindow.insertText(imageCode);
                                 };
                                 readImage.src = imageUrl;
@@ -205,4 +206,4 @@ window.addEventListener("load", () => {
             document.querySelector("#fastposteditor .bar").appendChild(autoResizeBtn);
         }
     }
-});
+})();

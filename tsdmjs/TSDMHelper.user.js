@@ -6,11 +6,11 @@
 // @author       Aoba xu
 // @match        https://www.tsdm.live/*
 // @grant        GM_xmlhttpRequest
-// @connect      sm.ms
+// @connect      www.52loli.top
 // @run-at       document-idle
 // ==/UserScript==
 
-(function(){
+(function () {
     'use strict';
     // 1. 帖子预览页面增加 PID 显示
     // 2. 复制链接非使用原生功能(仅测试 Chromium 系浏览器，理论上通用)
@@ -44,7 +44,7 @@
             };
         });
     }
-    
+
     // 1. 帖子发帖时缩放图像大小功能（仅限外链图片）
     // 2. 增加图床上传功能，感谢 vizv
     if (/mod=post|mod=viewthread|mod=forumdisplay/.test(location.href)) {
@@ -111,7 +111,7 @@
             imageCtrl.parentElement.appendChild(remotePanel);
             remotePanel.id = "e_remote";
             remotePanel.querySelector('#imgattachbtnhidden').remove()
-            remotePanel.querySelector(".notice").innerText = "使用 sm.ms 图床（请注意，如长时间未插入可能是图片过大或网络拥堵）";
+            remotePanel.querySelector(".notice").innerText = "使用 www.52loli.top 图床（请注意，如长时间未插入可能是图片过大或网络拥堵）";
             var remoteForm = remotePanel.querySelector('form');
             remoteForm.removeAttribute("action");
             remoteForm.querySelectorAll("input[type=hidden]").forEach(el => el.remove());
@@ -134,37 +134,21 @@
                 }
 
                 var pendingFormdata = new FormData();
-                pendingFormdata.append("smfile", pendingFile);
+                pendingFormdata.append("image", pendingFile);
                 pendingFormdata.append("file_id", "0");
 
                 remoteBtnSpan.innerText = "上传中……";
                 GM_xmlhttpRequest({
                     method: "POST",
-                    url: "https://sm.ms/api/v2/upload?inajax=1",
+                    url: "https://www.52loli.top/api/upload",
                     data: pendingFormdata,
                     onload: function () {
                         if (this.status === 200) {
                             var uploadResponse = JSON.parse(this.responseText);
 
                             var imageUrl = "";
-                            if (uploadResponse.code === "success") {
+                            if (uploadResponse.code === 200) {
                                 imageUrl = uploadResponse.data.url;
-                                var imageWidth = uploadResponse.data.width;
-                                var imageHeight = uploadResponse.data.height;
-
-                                var fitWidth = 712;
-                                if (imageWidth > fitWidth) {
-                                    imageHeight = Math.round(imageHeight / imageWidth * fitWidth);
-                                    imageWidth = fitWidth;
-                                }
-
-                                var imageCode = unsafeWindow.wysiwyg
-                                ? `<img src="${imageUrl}" width="${imageWidth}" height="${imageHeight}" border=0 />`
-                                : `[img=${imageWidth},${imageHeight}]${imageUrl}[/img]`;
-
-                                unsafeWindow.insertText(imageCode);
-                            } else if (uploadResponse.code === "image_repeated") {
-                                imageUrl = uploadResponse.images;
                                 var readImage = new Image();
                                 readImage.onload = () => {
                                     var imageWidth = readImage.width;

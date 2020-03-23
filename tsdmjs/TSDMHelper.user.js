@@ -54,8 +54,8 @@
         var autoResizeBtn = document.createElement("a");
         autoResizeBtn.href = "javascript:;";
         autoResizeBtn.id = isAdvance ? "autoresize-btn" : "autoresize-btn-end";
-        autoResizeBtn.title = "一键缩放图片";
-        autoResizeBtn.innerText = "一键缩放图片";
+        autoResizeBtn.title = "缩放图片";
+        autoResizeBtn.innerText = "缩放图片";
         autoResizeBtn.style.background = "none";
         autoResizeBtn.style.lineHeight = "20px";
         autoResizeBtn.addEventListener("click", (e) => {

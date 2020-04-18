@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/css/bootstrap.css" />
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid" ng-app="">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        答案由此填入
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="q1" class="col-md-2 col-form-label">01. 音乐的最高殿堂日本武道馆在东京的哪个区？</label>
+                            <div class="col-md-10" id="q1">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q1a1" name="q1a" ng-model="q1a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q1a1">A. 千代田区</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q1a2" name="q1a" ng-model="q1a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q1a2">B. 足立区</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q1a3" name="q1a" ng-model="q1a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q1a3">C. 文京区</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q1a4" name="q1a" ng-model="q1a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q1a4">D. 新宿区</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q2" class="col-md-2 col-form-label">02. 以下哪位不是声优御三家中的？</label>
+                            <div class="col-md-10" id="q2">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q2a1" name="q2a" ng-model="q2a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q2a1">A. 堀江由衣</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q2a2" name="q2a" ng-model="q2a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q2a2">B. 水樹奈々</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q2a3" name="q2a" ng-model="q2a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q2a3">C. 田村ゆかり</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q2a4" name="q2a" ng-model="q2a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q2a4">D. 釘宮理恵</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q3" class="col-md-2 col-form-label">03. Animelo Summer Live 2019 是哪几天举办的？</label>
+                            <div class="col-md-10" id="q3">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q3a1" name="q3a" ng-model="q3a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q3a1">A. 8.29 - 8.31</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q3a2" name="q3a" ng-model="q3a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q3a2">B. 8.26 - 8.28</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q3a3" name="q3a" ng-model="q3a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q3a3">C. 8.30 - 9.01</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q3a4" name="q3a" ng-model="q3a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q3a4">D. 8.20 - 8.23</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q4" class="col-md-2 col-form-label">04. “塔塔开”这个梗出自哪部作品？</label>
+                            <div class="col-md-10" id="q4">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q4a1" name="q4a" ng-model="q4a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q4a1">A. 碧蓝航线</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q4a2" name="q4a" ng-model="q4a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q4a2">B. 舰队Collection</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q4a3" name="q4a" ng-model="q4a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q4a3">C. 高校舰队</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q4a4" name="q4a" ng-model="q4a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q4a4">D. 强袭魔女</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q5" class="col-md-2 col-form-label">05. 不许摸(ブシモ) 空耳对应哪家公司</label>
+                            <div class="col-md-10" id="q5">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q5a1" name="q5a" ng-model="q5a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q5a1">A. 万代(Bandai)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q5a2" name="q5a" ng-model="q5a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q5a2">B. 武士道(Bushiroad)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q5a3" name="q5a" ng-model="q5a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q5a3">C. 世嘉(Saga)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q5a4" name="q5a" ng-model="q5a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q5a4">D. 卡普空(Capcom)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q6" class="col-md-2 col-form-label">06.  "其实我对oo还是蛮有自信的" 出自哪部番？</label>
+                            <div class="col-md-10" id="q6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q6a1" name="q6a" ng-model="q6a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q6a1">A. 邪神与厨二病少女</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q6a2" name="q6a" ng-model="q6a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q6a2">B. 小林家的龙女仆</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q6a3" name="q6a" ng-model="q6a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q6a3">C. 珈百璃的堕落</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q6a4" name="q6a" ng-model="q6a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q6a4">D. 天使降临到我身边</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q7" class="col-md-2 col-form-label">07. 哪个不属于视频编码？</label>
+                            <div class="col-md-10" id="q7">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q7a1" name="q7a" ng-model="q7a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q7a1">A. AVC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q7a2" name="q7a" ng-model="q7a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q7a2">B. HEVC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q7a3" name="q7a" ng-model="q7a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q7a3">C. VP9</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q7a4" name="q7a" ng-model="q7a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q7a4">D. FLAC</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q8" class="col-md-2 col-form-label">08. “小朋友，你是否有很多问号” 出自哪首歌？</label>
+                            <div class="col-md-10" id="q8">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q8a1" name="q8a" ng-model="q8a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q8a1">A. 听奶奶的话</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q8a2" name="q8a" ng-model="q8a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q8a2">B. 听姥姥的话</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q8a3" name="q8a" ng-model="q8a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q8a3">C. 听爸爸的话</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q8a4" name="q8a" ng-model="q8a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q8a4">D. 听妈妈的话</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q9" class="col-md-2 col-form-label">09. 以下哪个音频编码不是无损的？</label>
+                            <div class="col-md-10" id="q9">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q9a1" name="q9a" ng-model="q9a" class="custom-control-input"
+                                        value="A">
+                                    <label class="custom-control-label" for="q9a1">A. AAC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q9a2" name="q9a" ng-model="q9a" class="custom-control-input"
+                                        value="B">
+                                    <label class="custom-control-label" for="q9a2">B. ALAC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q9a3" name="q9a" ng-model="q9a" class="custom-control-input"
+                                        value="C">
+                                    <label class="custom-control-label" for="q9a3">C. FLAC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q9a4" name="q9a" ng-model="q9a" class="custom-control-input"
+                                        value="D">
+                                    <label class="custom-control-label" for="q9a4">D. TAK</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="q10" class="col-md-2 col-form-label">10. N95 和 KN95 分别是哪国标准？</label>
+                            <div class="col-md-10" id="q10">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q10a1" name="q10a" ng-model="q10a"
+                                        class="custom-control-input" value="A">
+                                    <label class="custom-control-label" for="q10a1">A. 中国和美国</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q10a2" name="q10a" ng-model="q10a"
+                                        class="custom-control-input" value="B">
+                                    <label class="custom-control-label" for="q10a2">B. 美国和中国</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q10a3" name="q10a" ng-model="q10a"
+                                        class="custom-control-input" value="C">
+                                    <label class="custom-control-label" for="q10a3">C. 日本和中国</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="q10a4" name="q10a" ng-model="q10a"
+                                        class="custom-control-input" value="D">
+                                    <label class="custom-control-label" for="q10a4">D. 中国和欧盟</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="copy" data-clipboard-target="#answerbox"
+                            data-clipboard-action="copy">复制答案到剪贴板</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        回复
+                    </div>
+                    <div class="card-body" id="answerbox">
+                        <p>2020 学园祭 MTV版趣味答题答题纸<br />
+                            01. [{{q1a}}]<br />
+                            02. [{{q2a}}]<br />
+                            03. [{{q3a}}]<br />
+                            04. [{{q4a}}]<br />
+                            05. [{{q5a}}]<br />
+                            06. [{{q6a}}]<br />
+                            07. [{{q7a}}]<br />
+                            08. [{{q8a}}]<br />
+                            09. [{{q9a}}]<br />
+                            10. [{{q10a}}]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script>
+        var clipboard = new ClipboardJS("#copy");
+    </script>
+</body>
+
+</html>
